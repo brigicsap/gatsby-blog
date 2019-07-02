@@ -18,17 +18,17 @@ Based on [Gatsby Minimal Blog](https://minimal-blog.lekoarts.de)
 
 ## Getting Started
 
-Check your development environment! You'll need [Node.js](https://nodejs.org/en/), the [Gatsby CLI](https://www.gatsbyjs.org/docs/) and [node-gyp](https://github.com/nodejs/node-gyp#installation) installed. The official Gatsby website also lists two articles regarding this topic:
+Check your development environment! You'll need [Node.js](https://nodejs.org/en/), the [Gatsby CLI](https://www.gatsbyjs.org/docs/) and [node-gyp](https://github.com/nodejs/node-gyp#installation) installed.
 
 ```
 yarn
 ```
-```
-yarn dev
-```
 
 ### Building your site
 
+```
+yarn dev
+```
 ```
 yarn build
 ```
