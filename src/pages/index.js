@@ -1,8 +1,9 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Layout from "../components/Layout"
-import Article from '../components/Article'
+import Layout from "../components/Layout/Layout"
+import ArticleList from '../components/Article/ArticleList'
+import ArticleItem from '../components/Article/ArticleItem'
 import SEO from "../components/Seo"
 
 const IndexPage = ({ data: { allMarkdownRemark }}) => {
@@ -11,20 +12,15 @@ const IndexPage = ({ data: { allMarkdownRemark }}) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <h1 style={{
-        fontSize: '8rem',
-        fontWeight: '600'
-      }}>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <ul>
+      <ArticleList>
         { posts && posts.map(({node}) => (
-          <Article
+          <ArticleItem
             key={node.id}
             title={node.frontmatter.title}
             slug={node.fields.slug}
           />
         ))}
-      </ul>
+      </ArticleList>
     </Layout>
   )
 }

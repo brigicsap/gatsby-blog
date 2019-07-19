@@ -1,18 +1,4 @@
-/**
- * Layout component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
- */
-
-import React from "react"
-import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-
-import theme from '../../config/theme'
-import Header from "./Header"
-import Container from './Container'
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -68,16 +54,16 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background: ${props => props.theme.colors.bg};
-    color: ${props => props.theme.colors.grey.default};
+    color: ${props => props.theme.colors.midgrey};
     font-size: 1.6rem;
   }
   a {
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.defaultgrey};
     text-decoration: none;
     transition: all ${props => props.theme.transitions.normal};
   }
   a:hover {
-    color: ${props => props.theme.colors.primaryLight};
+    color: ${props => props.theme.colors.darkgrey};
   }
   a:not([href]):not([tabindex]) {
     color: inherit;
@@ -92,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   h1, h2, h3, h4, h5, h6 {
-    color: ${props => props.theme.colors.grey.dark};
+    color: ${props => props.theme.colors.darkgrey};
     font-family: ${props => props.theme.fontFamily.sansSerif};
   }
   blockquote {
@@ -103,14 +89,14 @@ const GlobalStyle = createGlobalStyle`
   blockquote:before {
     content: "";
     position: absolute;
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.defaultgrey};
     height: 100%;
-    width: 6px;
-    margin-left: -1.6rem;
+    width: 5px;
+    margin-left: -2rem;
   }
   label {
     margin-bottom: .5rem;
-    color: ${props => props.theme.colors.grey.dark};
+    color: ${props => props.theme.colors.darkgrey};
   }
   input, textarea, button {
     font-size: 1rem;
@@ -195,45 +181,4 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 30rem auto;
-  height: 100vh;
-  position: relative;
-`
-
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <ThemeProvider theme={theme}>
-        <Wrapper>
-          <Header siteTitle={data.site.siteMetadata.title} />
-          <div>
-            <Container>
-              {children}
-            </Container>
-            <footer>
-              © {new Date().getFullYear()}
-            </footer>
-          </div>
-          <GlobalStyle/>
-        </Wrapper>
-      </ThemeProvider>
-    )}
-  />
-)
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout
+export default GlobalStyle

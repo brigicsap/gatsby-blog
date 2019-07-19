@@ -1,28 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import styled from 'styled-components'
 
-import Nav from './Nav'
-
-const StyledHeader = styled.header`
-  display: flex;
-  color: grey;
-  justify-content: space-between;
-`
-
-const Inner = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-`
-const Title = styled.h1`
-  padding: 1rem;
-  a {
-    text-decoration: none;
-    font-size: 2rem;
-  }
-`
+import Nav from '../Nav/Nav'
+import { StyledHeader, Inner, Title } from './HeaderStyles'
 
 const Header = ({ siteTitle }) => (
   <StyledHeader>

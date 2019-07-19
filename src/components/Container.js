@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 
 const StyledMain = styled.div`
@@ -10,7 +10,7 @@ const Container = ({children}) => {
     <StyledMain>
       {children}
     </StyledMain>
-  );
-};
+  )
+}
 
-export default Container;
+export default Container

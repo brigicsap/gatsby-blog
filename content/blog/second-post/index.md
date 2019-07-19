@@ -9,25 +9,32 @@ This is my second post on my new fake blog! How exciting!
 
 
 ```js
-(function() {
+class Counter extends React.Component {
+  constructor() {
+    super()
+    this.state = { count: 0 }
+  }
 
-var cache = {};
-var form = $('form');
-var minified = true;
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.setState(state => ({ count: state.count + 1 }))
+    }, 1000)
+  }
 
-var dependencies = {};
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
-var treeURL = 'https://api.github.com/repos/PrismJS/prism/git/trees/gh-pages?recursive=1';
-var treePromise = new Promise(function(resolve) {
-	$u.xhr({
-		url: treeURL,
-		callback: function(xhr) {
-			if (xhr.status < 400) {
-				resolve(JSON.parse(xhr.responseText).tree);
-			}
-		}
-	});
-});
+  render() {
+    return (
+      <center>
+        <h3>
+          {this.state.count}
+        </h3>
+      </center>
+    )
+  }
+}
 ```
 
 Text between those lines
