@@ -1,8 +1,5 @@
-import { lighten } from 'polished'
-
 const colors = {
-  primary: '#FF625E', // Color for buttons or links
-  primaryLight: lighten(0.05, '#FF625E'),
+  primary: 'rebeccapurple', // Color for buttons or links
   bg: 'white', // Background color
   grey: {
     dark: 'rgba(0, 0, 0, 0.9)',
@@ -39,7 +36,7 @@ const theme = {
   breakpoints,
   fontFamily,
   maxWidth: '1000px',
-  baseFontSize: '1rem',
+  baseFontSize: '10px',
 }
 
 export default theme

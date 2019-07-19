@@ -1,36 +1,48 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "gatsby"
 import styled from 'styled-components'
 
-const Wrapper = styled.header`
-  grid-column: 1 / -1;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  padding: 2rem;
+import Nav from './Nav'
+
+const StyledHeader = styled.header`
+  display: flex;
+  color: grey;
+  justify-content: space-between;
 `
 
-const Content = styled.div`
-  max-width: ${props => props.theme.maxWidth};
-  margin: 0 auto;
-
+const Inner = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+`
+const Title = styled.h1`
+  padding: 1rem;
   a {
-    color: ${props => props.theme.colors.grey.dark};
-    font-size: 1.2rem;
-    &:hover {
-      opacity: 0.75;
-      color: ${props => props.theme.colors.grey.dark};
-    }
+    text-decoration: none;
+    font-size: 2rem;
   }
 `
 
-const Header = ({ children }) => (
-  <Wrapper>
-    <Content>{children}</Content>
-  </Wrapper>
+const Header = ({ siteTitle }) => (
+  <StyledHeader>
+    <Inner>
+      <Title>
+        <Link to="/">
+          {siteTitle}
+        </Link>
+      </Title>
+      </Inner>
+      <Nav>nav</Nav>
+  </StyledHeader>
 )
 
-export default Header
-
 Header.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
+  siteTitle: PropTypes.string,
 }
+
+Header.defaultProps = {
+  siteTitle: ``,
+}
+
+export default Header

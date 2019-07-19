@@ -1,10 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+/**
+ * Layout component that queries for data
+ * with Gatsby's StaticQuery component
+ *
+ * See: https://www.gatsbyjs.org/docs/static-query/
+ */
+
+import React from "react"
+import PropTypes from "prop-types"
+import { StaticQuery, graphql } from "gatsby"
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 
-import SEO from './SEO'
 import theme from '../../config/theme'
-import useBuildTime from '../hooks/useBuildTime'
+import Header from "./Header"
+import Container from './Container'
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -16,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    font-size: 10px;
   }
   ::selection {
     color: ${props => props.theme.colors.bg};
@@ -62,6 +69,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${props => props.theme.colors.bg};
     color: ${props => props.theme.colors.grey.default};
+    font-size: 1.6rem;
   }
   a {
     color: ${props => props.theme.colors.primary};
@@ -187,35 +195,45 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Footer = styled.footer`
-  text-align: center;
-  padding: 1rem;
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 30rem auto;
+  height: 100vh;
+  position: relative;
 `
 
-const Layout = ({ children, customSEO }) => {
-  const buildTime = useBuildTime()
+const Layout = ({ children }) => (
+  <StaticQuery
+    query={graphql`
+      query SiteTitleQuery {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `}
+    render={data => (
+      <ThemeProvider theme={theme}>
+        <Wrapper>
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div>
+            <Container>
+              {children}
+            </Container>
+            <footer>
+              © {new Date().getFullYear()}
+            </footer>
+          </div>
+          <GlobalStyle/>
+        </Wrapper>
+      </ThemeProvider>
+    )}
+  />
+)
 
-  return (
-    <ThemeProvider theme={theme}>
-      <React.Fragment>
-        {!customSEO && <SEO buildTime={buildTime} />}
-        <GlobalStyle />
-        {children}
-        <Footer>
-          <span>Last build: {buildTime}</span>
-        </Footer>
-      </React.Fragment>
-    </ThemeProvider>
-  )
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout
-
-Layout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
-  customSEO: PropTypes.bool,
-}
-
-Layout.defaultProps = {
-  customSEO: false,
-}

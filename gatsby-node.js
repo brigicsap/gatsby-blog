@@ -1,95 +1,71 @@
-const _ = require('lodash')
+const path = require(`path`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
-// graphql function doesn't throw an error so we have to check to check for the result.errors to throw manually
-const wrapper = promise =>
-  promise.then(result => {
-    if (result.errors) {
-      throw result.errors
-    }
-    return result
-  })
-
-exports.onCreateNode = ({ node, actions }) => {
-  const { createNodeField } = actions
-
-  let slug
-
-  if (node.internal.type === 'Mdx') {
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.slug)}`
-    } else if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
-    ) {
-      slug = `/${_.kebabCase(node.frontmatter.title)}`
-    }
-    createNodeField({ node, name: 'slug', value: slug })
-  }
-}
-
-exports.createPages = async ({ graphql, actions }) => {
+//Tell plugins to add pages.
+//called only after the initial sourcing and transformation of nodes plus creation of the GraphQL schema are complete so you can query your data in order to create pages.
+exports.createPages = async ({graphql, actions }) => {
   const { createPage } = actions
 
-  const postTemplate = require.resolve('./src/templates/post.js')
-  const categoryTemplate = require.resolve('./src/templates/category.js')
-
-  const result = await wrapper(
-    graphql(`
+  const postTemplate = path.resolve(`./src/templates/post.js`)
+  // Query for markdown nodes to use in creating pages.
+  const result = await graphql(
+    `
       {
-        allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-          nodes {
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              categories
+        allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: DESC }
+          limit: 100
+        ) {
+          edges {
+            node {
+              html
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                date(formatString: "DD MMMM")
+              }
             }
           }
         }
       }
-    `)
+    `
   )
 
-  const posts = result.data.allMdx.nodes
+  if (result.errors) {
+    throw result.errors
+  }
 
-  posts.forEach((n, index) => {
-    const next = index === 0 ? null : posts[index - 1]
-    const prev = index === posts.length - 1 ? null : posts[index + 1]
+  // Create blog posts pages.
+  const posts = result.data.allMarkdownRemark.edges
+
+  posts.forEach((post, index) => {
+    // const next = index === posts.length-1 ? null : posts[index-1].node
+    // const previous = index === 0 ? null : posts[index-1].node
 
     createPage({
-      path: n.fields.slug,
+      path: post.node.fields.slug,
       component: postTemplate,
+      // optional context data to be inserted as props into the page component..
       context: {
-        slug: n.fields.slug,
-        prev,
-        next,
-      },
+        slug: post.node.fields.slug,
+        // previous,
+        // next
+      }
     })
   })
+}
 
-  const categorySet = new Set()
+//Called when a new node is created. Plugins wishing to extend or transform nodes created by other plugins should implement this API.
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
 
-  _.each(posts, n => {
-    if (_.get(n, 'frontmatter.categories')) {
-      n.frontmatter.categories.forEach(cat => {
-        categorySet.add(cat)
-      })
-    }
-  })
-
-  const categories = Array.from(categorySet)
-
-  categories.forEach(category => {
-    createPage({
-      path: `/categories/${_.kebabCase(category)}`,
-      component: categoryTemplate,
-      context: {
-        category,
-      },
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({ node, getNode })
+    createNodeField({
+      name: `slug`,
+      node,
+      value,
     })
-  })
+  }
 }
