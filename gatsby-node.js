@@ -7,6 +7,7 @@ exports.createPages = async ({graphql, actions }) => {
   const { createPage } = actions
 
   const postTemplate = path.resolve(`./src/templates/post.js`)
+  const categoryTemplate = path.resolve(`./src/templates/category.js`)
   // Query for markdown nodes to use in creating pages.
   const result = await graphql(
     `
@@ -24,6 +25,7 @@ exports.createPages = async ({graphql, actions }) => {
               frontmatter {
                 title
                 date(formatString: "DD MMMM")
+                categories
               }
             }
           }
@@ -51,6 +53,23 @@ exports.createPages = async ({graphql, actions }) => {
         slug: post.node.fields.slug,
         // previous,
         // next
+      }
+    })
+  })
+
+  const cats = posts.map(post => post.node.frontmatter.categories)
+  const flattened = Array.prototype.concat.apply([], cats)
+  //use a set to make sure we only include each category once
+  const categorySet = [...new Set(flattened)]
+  //turn back into array
+  const uniqueCategories = Array.from(categorySet)
+
+  uniqueCategories.forEach(category => {
+    createPage({
+      path: `/categories/${category}`,
+      component: categoryTemplate,
+      context: {
+        category
       }
     })
   })

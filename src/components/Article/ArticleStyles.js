@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const StyledArticleList = styled.ul`
   margin: 0;
+  margin-left: 4rem;
   padding: 2rem 0;
   list-style: none;
 `

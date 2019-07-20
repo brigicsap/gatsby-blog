@@ -1,6 +1,10 @@
 ---
 title: Hello World
 date: "2019-07-19T22:12:03.284Z"
+categories:
+ - general
+ - blah
+ - help
 ---
 
 This is my first post on my new fake blog! How exciting!

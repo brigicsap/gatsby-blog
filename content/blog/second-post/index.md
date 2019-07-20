@@ -1,6 +1,9 @@
 ---
 title: Second post
 date: "2019-07-19T23:12:03.284Z"
+categories:
+  - coding
+  - help
 ---
 
 This is my second post on my new fake blog! How exciting!

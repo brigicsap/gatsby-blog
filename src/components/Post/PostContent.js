@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledPostContent } from './PostContentStyles'
+import { StyledPostContent } from './PostStyles'
 
 const PostContent = ({content}) => {
   return (

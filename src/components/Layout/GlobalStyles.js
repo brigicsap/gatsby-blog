@@ -58,12 +58,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
   }
   a {
-    color: ${props => props.theme.colors.defaultgrey};
+    color: black;
     text-decoration: none;
     transition: all ${props => props.theme.transitions.normal};
-  }
-  a:hover {
-    color: ${props => props.theme.colors.darkgrey};
   }
   a:not([href]):not([tabindex]) {
     color: inherit;

@@ -5,14 +5,14 @@ const StyledHeader = styled.header`
   width: 30rem;
   left: 0;
   top: 0;
-  display: flex;
   color: grey;
-  justify-content: space-between;
+  border-right: 1px solid lightgrey;
 `
 
 const Inner = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
   background: white;
 `

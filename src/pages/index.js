@@ -1,17 +1,17 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/Layout/Layout"
 import ArticleList from '../components/Article/ArticleList'
 import ArticleItem from '../components/Article/ArticleItem'
-import SEO from "../components/Seo"
+import Seo from "../components/Seo"
 
 const IndexPage = ({ data: { allMarkdownRemark }}) => {
   const posts = allMarkdownRemark.edges
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <Seo title="Home" />
       <ArticleList>
         { posts && posts.map(({node}) => (
           <ArticleItem

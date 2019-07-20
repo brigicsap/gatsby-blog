@@ -1,20 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/Layout/Layout"
 import PostContent from "../components/Post/PostContent"
-import SEO from "../components/Seo"
+import PostHeader from "../components/Post/PostHeader"
+import Seo from "../components/Seo"
 
-import { StyledPostTitle } from '../components/Post/PostContentStyles'
-const Post = ({data}) => {
-  console.log({data})
+const Post = ({data, pageContext }) => {
   const title = data.markdownRemark.frontmatter.title
   const post = data.markdownRemark
+  const categories = data.markdownRemark.frontmatter.categories
   // const { previous, next } = this.props.pageContext
   return (
     <Layout>
-      <StyledPostTitle>{title}</StyledPostTitle>
+      <Seo title={title} />
+      <PostHeader
+        title={title}
+        categories={categories}
+      />
       <PostContent content={post.html}/>
     </Layout>
   )
@@ -47,6 +51,7 @@ export const postQuery = graphql`
       frontmatter {
         title
         date(formatString: "DD MMMM YYYY")
+        categories
       }
       id
       html
