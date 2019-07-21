@@ -1,31 +1,55 @@
 import styled from 'styled-components'
 
 const StyledPostHeader = styled.div`
-  height: 35vh;
-  padding-top: 2rem;
+  padding-top: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`
 
-const StyledPostContent = styled.article`
-  padding: 3rem;
-  max-width: 60rem;
-
-  p {
-    line-height: 2.6rem;
+  @media (min-width: ${props => props.theme.breakpoints.phone}) {
+    height: 35vh;
+    flex-direction: column-reverse;
   }
 `
 
+const StyledPostContent = styled.article`
+  padding: 0 2rem 3rem;
+
+  @media (min-width: ${props => props.theme.breakpoints.phone}) {
+    padding: 3rem;
+    max-width: 60rem;
+  }
+
+  h2, h3 {
+    margin-top: 3rem;
+  }
+
+  p {
+    line-height: 2.6rem;
+    color: ${props => props.theme.colors.darkgrey};
+  }
+
+`
+
 const StyledPostTitle = styled.h1`
-  padding: 6rem 3rem 0;
   margin: 0;
-  font-size: 5rem;
+  padding: 0 2rem;
+  font-size: 4rem;
+
+  @media (min-width: ${props => props.theme.breakpoints.phone}) {
+    padding: 6rem 3rem 0;
+    font-size: 5rem;
+  }
 `
 
 const CategoryList = styled.ul`
   list-style: none;
   font-size: 1.4rem;
+  padding-left: 3rem;
+
+  @media (max-width: ${props => props.theme.breakpoints.phone}) {
+    padding-left: 2rem;
+  }
 
   li {
     display: inline-block;
@@ -43,7 +67,7 @@ const CategoryList = styled.ul`
 
   a {
     color: ${props => props.theme.colors.defaultgrey};
-    font-family: 'PT Mono', monospace;
+    font-family: ${props => props.theme.fontFamily.monospace};
     text-transform: uppercase;
   }
 `

@@ -1,5 +1,19 @@
 import { createGlobalStyle } from 'styled-components'
 
+// @font-face {
+//   font-family: 'Silka';
+//   src: url("../static/fonts/silka-regular.eot") format("eot"),
+//        url("../static/fonts/silka-regular.woff2") format("woff2");
+//   font-weight: normal;
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: 'Silka-Italic';
+//   src: url("../static/fonts/silka-regularitalic.eot") format("eot"),
+//        url("../static/fonts/silka-regularitalic.woff2") format("woff2");
+//   font-weight: normal;
+//   font-style: normal;
+// }
 const GlobalStyle = createGlobalStyle`
   *,
   *:before,
@@ -16,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.colors.primary};
   }
   html {
+    background: white;
     font-family: ${props => props.theme.fontFamily.sansSerif};
     font-size: ${props => props.theme.baseFontSize};
     h1 {
@@ -34,18 +49,18 @@ const GlobalStyle = createGlobalStyle`
       font-size: 1.25rem;
     }
     @media (max-width: ${props => props.theme.breakpoints.phone}) {
-      font-size: 1.6rem;
+      font-size: ${props => props.theme.baseFontSize};
       h1 {
-        font-size: 2.488rem;
+        font-size: 2.4rem;
       }
       h2 {
-        font-size: 2.074rem;
+        font-size: 2rem;
       }
       h3 {
-        font-size: 1.728rem;
+        font-size: 1.7rem;
       }
       h4 {
-        font-size: 1.444rem;
+        font-size: 1.4rem;
       }
       h5 {
         font-size: 1.2rem;
@@ -53,8 +68,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   body {
-    background: ${props => props.theme.colors.bg};
-    color: ${props => props.theme.colors.midgrey};
+    color: ${props => props.theme.colors.darkgrey};
     font-size: 1.6rem;
   }
   a {

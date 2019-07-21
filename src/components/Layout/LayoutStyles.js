@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 const Content = styled.div`
   position: relative;
-  margin-left: 30rem;
+
+  @media (min-width: ${props => props.theme.breakpoints.phone}) {
+    margin-left: 30rem;
+  }
 `
 
 const CategoryTitle = styled.h1`
@@ -14,6 +17,7 @@ const CategoryTitle = styled.h1`
   writing-mode: vertical-lr;
   white-space: nowrap;
   transform: rotate(180deg);
+  opacity: .5;
 `
 
 export { Content, CategoryTitle }

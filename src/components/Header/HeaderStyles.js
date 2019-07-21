@@ -1,24 +1,32 @@
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`
-  position: fixed;
-  width: 30rem;
-  left: 0;
-  top: 0;
-  color: grey;
-  border-right: 1px solid lightgrey;
+  @media (min-width: ${props => props.theme.breakpoints.phone}) {
+    border-right: 1px solid lightgrey;
+    position: fixed;
+    width: 30rem;
+    left: 0;
+    top: 0;
+  }
 `
 
 const Inner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
   background: white;
+
+  @media (min-width: ${props => props.theme.breakpoints.phone}) {
+    height: 100vh;
+  }
 `
 
 const Title = styled.h1`
   padding: 0 1rem;
+  @media (max-width: ${props => props.theme.breakpoints.phone}) {
+    padding: 0 2rem;
+  }
+
   a {
     color: black;
     text-decoration: none;

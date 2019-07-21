@@ -9,7 +9,7 @@ const colors = {
 }
 
 const transitions = {
-  normal: '0.2s',
+  normal: '0.2s ease',
 }
 
 const fontSize = {
@@ -17,9 +17,9 @@ const fontSize = {
 }
 
 const fontFamily = {
-  // @TODO - remove if not used
-  // serif: `'ScopeOne-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', serif`,
-  sansSerif: `'Silka', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif`,
+  sansSerif: `'Silka', -apple-system, BlinkMacSystemFont, 'Helvetica', 'Arial', sans-serif`,
+  monospace: `'PT Mono', monospace`,
+  italic: `'Silka-Italic', -apple-system, BlinkMacSystemFont, 'Helvetica', 'Arial', sans-serif`
 }
 
 const breakpoints = {

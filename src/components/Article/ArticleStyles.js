@@ -8,22 +8,29 @@ const StyledArticleList = styled.ul`
 `
 
 const StyledArticleItem = styled.li`
-  padding: 1rem 0;
+  padding: 1rem 3rem;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-  transition: all .2s ease;
+  transition: all ${props => props.theme.transitions.normal};
 
   a {
     color: black;
     font-size: 1.8rem;
     font-weight: 600;
-    padding: 0 3rem;
-  }
+    background: linear-gradient(to bottom, #D9D9D9 0%, #D9D9D9 100%);
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    background-size: 2px 2px;
+    transition: background-size ${props => props.theme.transitions.normal};
 
-  &:hover,
-  &:focus {
-    border-top: 1px solid ${props => props.theme.colors.lightgrey};
-    border-bottom: 1px solid ${props => props.theme.colors.lightgrey};
+    @media (min-width: ${props => props.theme.breakpoints.phone}) {
+      font-size: 2.4rem;
+    }
+
+    &:hover,
+    &:focus {
+      background-size: 4px 50px;
+    }
   }
 `
 

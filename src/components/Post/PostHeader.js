@@ -7,6 +7,7 @@ import { StyledPostHeader, StyledPostTitle, CategoryList } from './PostStyles'
 const PostHeader = ({ title, categories }) => {
   return (
     <StyledPostHeader>
+      <StyledPostTitle>{title}</StyledPostTitle>
       <CategoryList>
         { categories && categories.map(cat => (
           <li key={cat}>
@@ -15,7 +16,6 @@ const PostHeader = ({ title, categories }) => {
           ))
         }
       </CategoryList>
-      <StyledPostTitle>{title}</StyledPostTitle>
     </StyledPostHeader>
   );
 };
