@@ -50,7 +50,7 @@ export const postQuery = graphql`
     markdownRemark(fields: { slug: { eq: $slug }}) {
       frontmatter {
         title
-        date(formatString: "DD MMMM YYYY")
+        date(formatString: "DD MMMM")
         categories
       }
       id

@@ -24,7 +24,7 @@ const StyledPostContent = styled.article`
     margin-top: 3rem;
   }
 
-  p {
+  p, li {
     line-height: 2.6rem;
     color: ${props => props.theme.colors.darkgrey};
   }

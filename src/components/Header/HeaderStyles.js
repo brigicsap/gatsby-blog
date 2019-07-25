@@ -22,10 +22,7 @@ const Inner = styled.div`
 `
 
 const Title = styled.h1`
-  padding: 0 1rem;
-  @media (max-width: ${props => props.theme.breakpoints.phone}) {
-    padding: 0 2rem;
-  }
+  padding: 0 2rem;
 
   a {
     color: black;
